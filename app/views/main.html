@@ -1,3 +1,22 @@
+<h4>CrossDomainPost</h4>
+<p>
+<div class="input-group col-md-12" style="margin-bottom:10px;">
+  <label class="input-group-addon">&nbsp;&nbsp;&nbsp;url</label>
+  <input type="text" class="form-control"  name="url" ng-model="testUrl">
+</div>
+<div class="input-group col-md-12" style="margin-bottom:10px;">
+  <label class="input-group-addon">data</label>
+  <input type="testData"  class="form-control" name="url" ng-model="testData">
+</div>
+<button class="btn btn-primary" style="margin-bottom:10px;float: right;" ng-click="send();">
+  <span>send</span>
+</button>
+<div class="input-group col-md-12">
+  <textarea class="form-control custom-control" rows="3" style="resize:none;display: block;"></textarea>
+</div>
+</p>
+<hr/>
+
 <h4>Routes</h4>
     <p>
         <a ng-hide="authenticated" href="#/login" class="btn btn-primary">Login</a>
@@ -13,31 +32,4 @@
         <a href="#/authRequired" class="btn btn-primary">Restricted Page</a>
     </p>
 <hr/>
-<h4>Kitchen Sink Demo</h4>
-<div style="margin-bottom:25px;">
-  <div style="margin-bottom:15px;">
-    <button ng-hide="authenticated" ng-click="login()" class="btn btn-primary">Login</button>
-    <button ng-show="authenticated" ng-click="logout()" class="btn btn-primary">Logout</button>
-    <button ng-hide="authenticated" ng-click="resetPassword()" class="btn btn-primary">Send Password Reset</button>
-    <button ng-hide="authenticated" ng-click="confirmReset()" class="btn btn-primary">Confirm Password Reset</button>
-    <button ng-hide="authenticated" ng-click="register()" class="btn btn-primary">Register</button>
-    <button ng-click="verify()" class="btn btn-primary">Verify Email</button>
-    <button ng-show="authenticated" ng-click="changePassword()" class="btn btn-primary">Change Password</button>
-    <button ng-show="authenticated" ng-click="profile()" class="btn btn-primary">Get Profile</button>
-    <button ng-show="authenticated" ng-click="updateProfile()" class="btn btn-primary">Update Profile</button>
-  </div>
-
-  <p><textarea style="width:90%;height:200px;">{{response}}</textarea></p>
-
-</div>
-
-<hr/>
-<h4>ngInclude Demo - Login</h4>
-<div ng-if="show_login" ng-include="'views/login.html'"></div>
-<div ng-if="!show_login" class="alert alert-info">You have logged in.</div>
-
-
-<div class="footer">
-  <p>Tivix</p>
-</div>
 

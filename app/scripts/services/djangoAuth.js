@@ -8,6 +8,7 @@ angular.module('angularDjangoRegistrationAuthApp')
         // Change this to point to your Django REST Auth API
         // e.g. /api/rest-auth  (DO NOT INCLUDE ENDING SLASH)
         'API_URL': '',
+        'authPath':'',
         // Set use_session to true to use Django sessions to store security token.
         // Set use_session to false to store the security token locally and transmit it as a custom header.
         'use_session': true,
@@ -23,7 +24,7 @@ angular.module('angularDjangoRegistrationAuthApp')
             params = args.params || {}
             args = args || {};
             var deferred = $q.defer(),
-                url = this.API_URL + args.url,
+                url = args.withAuthPath !== false?(this.API_HOST + this.authPath + args.url):(this.API_HOST + args.url),
                 method = args.method || "GET",
                 params = params,
                 data = args.data || {};
@@ -131,21 +132,21 @@ angular.module('angularDjangoRegistrationAuthApp')
             return this.request({
                 'method': "GET",
                 'url': "/user/"
-            }); 
+            });
         },
         'updateProfile': function(data){
             return this.request({
                 'method': "PATCH",
                 'url': "/user/",
                 'data':data
-            }); 
+            });
         },
         'verify': function(key){
             return this.request({
                 'method': "POST",
                 'url': "/registration/verify-email/",
-                'data': {'key': key} 
-            });            
+                'data': {'key': key}
+            });
         },
         'confirmReset': function(uid,token,password1,password2){
             return this.request({
@@ -197,8 +198,17 @@ angular.module('angularDjangoRegistrationAuthApp')
             }
             return getAuthStatus.promise;
         },
-        'initialize': function(url, sessions){
-            this.API_URL = url;
+        'send':function(url,data){
+          return this.request({
+            'method': "POST",
+            'url': url,
+            'data' :data,
+            'withAuthPath':false
+          });
+        },
+        'initialize': function(host,authPath, sessions){
+            this.API_HOST = host;
+            this.authPath = authPath;
             this.use_session = sessions;
             return this.authenticationStatus();
         }
